@@ -3,16 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-settings',
+  selector: 'app-absences',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  //templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './absences.component.css',
   template: `
-  <router-outlet />
-  
   `
 })
-export class SettingsComponent {
-  title = 'Settings';
+export class AbsencesComponent {
+  title = 'Absences';
 }
