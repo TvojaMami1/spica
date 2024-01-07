@@ -12,7 +12,22 @@ import { UsersService } from '../users.service';
   template: `
   <h2>Users</h2>
   @if (showUsers) {
-    
+    <form>
+      <input type="text">
+      <button>Submit</button>
+    </form>
+    <table class="niceTable">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+      @for (item of usersData; track usersData.id) {
+        <tr>
+          <td>{{item.FirstName}}</td>
+          <td>{{item.LastName}}</td>
+        </tr>
+      }
+    </table>
   } @else {
     <p>The Auth Data is not correct. Return to "Settings" and try again.</p>
   }
@@ -26,6 +41,8 @@ export class UsersComponent {
   tokenObj = JSON.parse(this.token || "");
   users;
   showUsers = true;
+  keys: any = [];
+  usersData: any;
 
   constructor(private userService: UsersService) {
     this.users = this.userService.getUsers().subscribe(
@@ -49,11 +66,8 @@ export class UsersComponent {
 
   makeUsersTable(dataArr: Object) {
     console.log(dataArr);
-    let keys = Object.keys(dataArr);
-    console.log(keys);
-    for (let index = 0; index < keys.length; index++) {
-      
-      
-    }
+    this.usersData = dataArr;
+    this.keys = Object.keys(dataArr);
+    console.log(this.keys);
   }
 }
