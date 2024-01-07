@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormGroup, FormControl} from '@angular/forms';
-import { ApiConnectionService } from '../api-connection.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +19,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
       <label>Client Secret <input type="password" formControlName="secret" /></label>
       <button type="submit">Submit</button>
     </form>
-  `
+  `,
+  providers: [HttpClientModule]
 })
 
 export class SettingsComponent {
