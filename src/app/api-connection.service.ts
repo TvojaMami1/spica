@@ -8,7 +8,7 @@ export class ApiConnectionService {
 
   constructor(private http: HttpClient) { }
 
-  getAccessToken() {
+  getAccessToken(idx: string, secretx: string) {
     const url = 'https://login.allhours.com/connect/token';
     let id = window.localStorage.getItem("id");
     if (id == null) {
@@ -21,8 +21,8 @@ export class ApiConnectionService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
     const body = new URLSearchParams({
       'grant_type': 'client_credentials',
-      'client_id': id,
-      'client_secret': secret,
+      'client_id': idx,
+      'client_secret': secretx,
       'scope': 'api'
     }).toString();
     return this.http.post(url, body, {headers});

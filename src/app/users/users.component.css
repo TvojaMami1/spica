@@ -1,4 +1,16 @@
-.niceTable {
+.nice-table {
     border: 1px black solid;
-    margin: 15px;
+    margin: 20px;
+}
+
+label {
+    margin-left: 20px;
+}
+
+button {
+    margin-left: 10px;
+}
+
+#clear-button {
+    margin-top: 10px;
 }

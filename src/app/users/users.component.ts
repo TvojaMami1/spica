@@ -13,14 +13,32 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   template: `
   <h2>Users</h2>
   @if (showUsers) {
+    <h4>Add new user</h4>
+    <form [formGroup]="addUserForm" (ngSubmit)="addUser()">
+      <label>First Name: <input required type="text" formControlName="firstName"></label>
+      <label>Last Name: <input required  type="text" formControlName="lastName"></label>
+      <label>Email: <input required type="email" formControlName="email"></label>
+      <button type="submit">Add</button>
+    </form>
+
+    <h4>Add Absence</h4>
+    <form [formGroup]="addAbsenceToUserForm" (ngSubmit)="addAbsenceToUser()">
+      <label>First Name: <input required type="text" formControlName="firstName"></label>
+      <label>Last Name: <input required  type="text" formControlName="lastName"></label>
+      <label>Absence: <input required type="email" formControlName="email"></label>
+      <button type="submit">Add</button>
+    </form>
+
+    <h4>Search users</h4>
     <form [formGroup]="userForm" (ngSubmit)="searchUser()">
-      <input type="text" formControlName="fullName">
+      <label><input type="text" formControlName="fullName"></label>
       <button type="submit">Search</button>
     </form>
     @if (userFormView) {
-      <button (click)="showAll()">Clear</button>
+      <button (click)="showAll()" id="clear-button">Clear</button>
     }
-    <table class="niceTable">
+    <h4>Table</h4>
+    <table class="nice-table">
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -42,9 +60,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
       }
     </table>
   } @else {
-    <p>The Auth Data is not correct. Return to "Settings" and try again.</p>
+    <p>{{errorString}}</p>
   }
-  <button (click)="logToken()">Get Token</button>
   `,
   providers: [UsersService]
 })
@@ -54,11 +71,24 @@ export class UsersComponent {
   })
   userFormView = false;
 
+  addUserForm = new FormGroup({
+    firstName: new FormControl(""),
+    lastName: new FormControl(""),
+    email: new FormControl(""),
+  })
+
+  addAbsenceToUserForm = new FormGroup({
+    firstName: new FormControl(""),
+    lastName: new FormControl(""),
+    absence: new FormControl(""),
+  })
+
   title = 'Users';
   token = window.localStorage.getItem("token");
   tokenObj = JSON.parse(this.token || "");
   users;
   showUsers = true;
+  errorString = "";
   keys: any = [];
   usersData: any;
   searchUserData: any;
@@ -67,27 +97,32 @@ export class UsersComponent {
     this.users = this.userService.getUsers().subscribe(
       data => {
         console.log('Access Token:', data);
-        this.makeUsersTable(data);
+        this.usersData = data;
       },
       error => {
         console.error('Error fetching the access token:', error);
-        this.showUsers = false;
+        if (error.status == 401) {
+          this.showUsers = false;
+          this.errorString = 'The Auth Data is not correct. Return to "Settings" and try again.'
+        }
+        else {
+          this.showUsers = false;
+          this.errorString = 'Error connecting to API.'
+        }
       }
     );
   }
-  
-  logToken() {
-    console.log(typeof this.token == "string");
-    console.log(this.tokenObj);
-    console.log(this.tokenObj.access_token);
-    console.log(this.users);
-  }
 
-  makeUsersTable(dataArr: Object) {
-    console.log(dataArr);
-    this.usersData = dataArr;
-    this.keys = Object.keys(dataArr);
-    console.log(this.keys);
+  addUser() {
+    this.userService.addUser(this.addUserForm.value.firstName!, this.addUserForm.value.lastName!, this.addUserForm.value.email!).subscribe(
+      data => {
+        console.log('added user:', data);
+
+      },
+      error => {
+        console.error('Error adding user:', error);
+      }
+    );
   }
 
   searchUser() {
@@ -109,5 +144,9 @@ export class UsersComponent {
   showAll() {
     this.userFormView = false;
     this.userForm.get("fullName")?.reset();
+  }
+
+  addAbsenceToUser() {
+    
   }
 }

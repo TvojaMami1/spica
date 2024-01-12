@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormGroup, FormControl} from '@angular/forms';
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
       <button type="submit">Submit</button>
     </form>
   `,
-  providers: [HttpClientModule]
+  providers: [UsersService]
 })
 
 export class SettingsComponent {
@@ -32,14 +30,12 @@ export class SettingsComponent {
 
   //constructor(private apiConnectionService: ApiConnectionService) {}
 
-  constructor(private http: HttpClient) { }
+  constructor(private userService: UsersService) { }
 
   handleSubmit() {
     let id = String(this.profileForm.value.id);
     let secret = String(this.profileForm.value.secret);
-    window.localStorage.setItem("id", id);
-    window.localStorage.setItem("secret", secret);
-    this.getAccessToken().subscribe(
+    this.userService.getAccessToken(id, secret).subscribe(
       token => {
         console.log('Access Token:', token);
         // Store the token or do something with it
@@ -52,25 +48,5 @@ export class SettingsComponent {
         alert("Napačni auth podatki:(")
       }
     );
-  }
-
-  getAccessToken() {
-    const url = 'https://login.allhours.com/connect/token';
-    let id = window.localStorage.getItem("id");
-    if (id == null) {
-      id = ""
-    }
-    let secret = window.localStorage.getItem("secret");
-    if (secret == null) {
-      secret = ""
-    }
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    const body = new URLSearchParams({
-      'grant_type': 'client_credentials',
-      'client_id': id,
-      'client_secret': secret,
-      'scope': 'api'
-    }).toString();
-    return this.http.post(url, body, {headers});
   }
 }
