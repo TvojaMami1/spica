@@ -19,5 +19,6 @@ export const routes: Routes = [
         path: "absences",
         title: "Absences",
         component: AbsencesComponent,
-    }
+    },
+    { path: '',   redirectTo: '/settings', pathMatch: 'full' },
 ];

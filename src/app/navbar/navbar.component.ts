@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css',
   template: `
   <nav>
-    <a routerLink="/" routerLinkActive="active">Home</a>
+    
     <a routerLink="/settings" routerLinkActive="active">Settings</a>
     <a routerLink="/users" routerLinkActive="active">Users</a>
     <a routerLink="/absences" routerLinkActive="active">Absences</a>

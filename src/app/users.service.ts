@@ -83,7 +83,6 @@ export class UsersService {
       'client_secret': secretx,
       'scope': 'api'
     }).toString();
-    console.log(body);
     return this.http.post(url, body, {headers});
   }
   

@@ -7,7 +7,7 @@ import { UsersService } from '../users.service';
   selector: 'app-absences',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  styleUrl: './absences.component.css',
+  styleUrl: '../app.component.css',
   template: `
   <h2>Absences</h2>
   @if (showUsers) {

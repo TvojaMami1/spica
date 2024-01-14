@@ -9,7 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, RouterOutlet, ReactiveFormsModule],
   //templateUrl: './app.component.html',
-  styleUrl: './users.component.css',
+  styleUrl: '../app.component.css',
   template: `
   <h2>Users</h2>
   @if (showUsers) {
@@ -25,7 +25,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     <form [formGroup]="addAbsenceToUserForm" (ngSubmit)="addAbsenceToUser()">
       <label>First Name: <input required type="text" formControlName="firstName"></label>
       <label>Last Name: <input required  type="text" formControlName="lastName"></label>
-      <label>Absence: <input required type="email" formControlName="email"></label>
+      <label>Absence: <input required type="text" formControlName="absence"></label>
       <button type="submit">Add</button>
     </form>
 
@@ -92,6 +92,7 @@ export class UsersComponent {
   keys: any = [];
   usersData: any;
   searchUserData: any;
+  absences: any;
 
   constructor(private userService: UsersService) {
     this.users = this.userService.getUsers().subscribe(
@@ -109,6 +110,25 @@ export class UsersComponent {
           this.showUsers = false;
           this.errorString = 'Error connecting to API.'
         }
+      }
+    );
+
+    this.userService.getAbsences().subscribe(
+      data => {
+        console.log('added user:', data);
+        this.absences = data;
+      },
+      error => {
+        console.error('Error adding user:', error);
+        if (error.status == 401) {
+          this.showUsers = false;
+          this.errorString = 'The Auth Data is not correct. Return to "Settings" and try again.'
+        }
+        else {
+          this.showUsers = false;
+          this.errorString = 'Error connecting to API.'
+        }
+        this.showUsers = false;
       }
     );
   }
@@ -147,6 +167,6 @@ export class UsersComponent {
   }
 
   addAbsenceToUser() {
-    
+
   }
 }

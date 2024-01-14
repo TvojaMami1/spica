@@ -9,9 +9,10 @@ import { UsersService } from '../users.service';
   selector: 'app-settings',
   standalone: true,
   imports: [CommonModule, RouterOutlet, ReactiveFormsModule],
-  styleUrl: './settings.component.css',
+  styleUrl: '../app.component.css',
   template: `
   <h2>Auth Data</h2>
+  <p>Log in to get access to the database</p>
   <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
       <label>Client ID <input type="text" formControlName="id" /></label>
       <label>Client Secret <input type="password" formControlName="secret" /></label>
@@ -48,5 +49,7 @@ export class SettingsComponent {
         alert("Napačni auth podatki:(")
       }
     );
+
+    this.profileForm.reset();
   }
 }
