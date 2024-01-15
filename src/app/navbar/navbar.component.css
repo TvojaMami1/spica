@@ -3,5 +3,12 @@ nav a{
     min-width: 20px;
     min-height: 20px;
     padding: 5px;
-    
+    text-decoration: none;
+}
+
+
+
+.active-link {
+    background-color: grey;
+    color: white;
 }

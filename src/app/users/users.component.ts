@@ -25,7 +25,15 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     <form [formGroup]="addAbsenceToUserForm" (ngSubmit)="addAbsenceToUser()">
       <label>First Name: <input required type="text" formControlName="firstName"></label>
       <label>Last Name: <input required  type="text" formControlName="lastName"></label>
-      <label>Absence: <input required type="text" formControlName="absence"></label>
+      <label>Absence: 
+        <select required type="text" formControlName="absence">
+          @for (absence of absences; track absences.id) {
+            <option [value]="absence.Name">{{absence.Name}}</option>
+          }
+        </select>
+      </label>
+      <label>From: <input type="datetime-local" required formControlName="from"></label>
+      <label>To: <input type="datetime-local" required formControlName="to"></label>
       <button type="submit">Add</button>
     </form>
 
@@ -81,6 +89,8 @@ export class UsersComponent {
     firstName: new FormControl(""),
     lastName: new FormControl(""),
     absence: new FormControl(""),
+    from: new FormControl(""),
+    to: new FormControl(""),
   })
 
   title = 'Users';
@@ -167,6 +177,28 @@ export class UsersComponent {
   }
 
   addAbsenceToUser() {
+    let userFullName = this.addAbsenceToUserForm.value.firstName + " " + this.addAbsenceToUserForm.value.lastName;
+    let userAbsenceId;
+    for (let user of this.usersData) {
+      if ((user.FullName as string) == userFullName) {
+        userAbsenceId = user.Id;
+      }
+    }
+    let absenceId;
+    for (let absence of this.absences) {
+      if(absence.Name == this.addAbsenceToUserForm.value.absence) {
+        absenceId = absence.Id;
+      }
+    }
 
+    this.userService.addUserAbsence(userAbsenceId, this.addAbsenceToUserForm.value.absence!, absenceId, this.addAbsenceToUserForm.value.from!, this.addAbsenceToUserForm.value.to!).subscribe(
+      data => {
+        console.log('added absent user:', data);
+
+      },
+      error => {
+        console.error('Error adding absent user:', error);
+      }
+    )
   }
 }

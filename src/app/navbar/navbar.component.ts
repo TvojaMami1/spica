@@ -9,10 +9,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css',
   template: `
   <nav>
-    
-    <a routerLink="/settings" routerLinkActive="active">Settings</a>
-    <a routerLink="/users" routerLinkActive="active">Users</a>
-    <a routerLink="/absences" routerLinkActive="active">Absences</a>
+    <a routerLink="/settings" routerLinkActive="active-link">Settings</a>
+    <a routerLink="/users" routerLinkActive="active-link">Users</a>
+    <a routerLink="/absences" routerLinkActive="active-link">Absences</a>
   </nav>
   `
 })
