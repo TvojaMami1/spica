@@ -18,9 +18,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
       <label>First Name: <input required type="text" formControlName="firstName"></label>
       <label>Last Name: <input required  type="text" formControlName="lastName"></label>
       <label>Email: <input required type="email" formControlName="email"></label>
+      <br>
       <button type="submit">Add</button>
     </form>
-
+    <hr>
     <h4>Add Absence</h4>
     <form [formGroup]="addAbsenceToUserForm" (ngSubmit)="addAbsenceToUser()">
       <label>First Name: <input required type="text" formControlName="firstName"></label>
@@ -36,7 +37,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
       <label>To: <input type="datetime-local" required formControlName="to"></label>
       <button type="submit">Add</button>
     </form>
-
+    <hr>
     <h4>Search users</h4>
     <form [formGroup]="userForm" (ngSubmit)="searchUser()">
       <label><input type="text" formControlName="fullName"></label>
@@ -45,7 +46,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     @if (userFormView) {
       <button (click)="showAll()" id="clear-button">Clear</button>
     }
-    <h4>Table</h4>
     <table class="nice-table">
       <tr>
         <th>First Name</th>
@@ -147,10 +147,27 @@ export class UsersComponent {
     this.userService.addUser(this.addUserForm.value.firstName!, this.addUserForm.value.lastName!, this.addUserForm.value.email!).subscribe(
       data => {
         console.log('added user:', data);
-
+        this.users = this.userService.getUsers().subscribe(
+          data => {
+            console.log('Access Token:', data);
+            this.usersData = data;
+          },
+          error => {
+            console.error('Error fetching the access token:', error);
+            if (error.status == 401) {
+              this.showUsers = false;
+              this.errorString = 'The Auth Data is not correct. Return to "Settings" and try again.'
+            }
+            else {
+              this.showUsers = false;
+              this.errorString = 'Error connecting to API.'
+            }
+          }
+        );
       },
       error => {
         console.error('Error adding user:', error);
+        alert("User couldn't be added.")
       }
     );
   }
@@ -198,6 +215,7 @@ export class UsersComponent {
       },
       error => {
         console.error('Error adding absent user:', error);
+        alert("Absence couldn't be added.");
       }
     )
   }

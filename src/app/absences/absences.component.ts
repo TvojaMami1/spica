@@ -23,15 +23,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
         <th>First Name</th>
         <th>Last Name</th>
         <th>Absence</th>
-        <th>From</th>
-        <th>To</th>
       </tr>
       @for (user of absentUsers; track absentUsers.Id) {
         <tr>
           <td>{{user.FirstName}}</td>
           <td>{{user.LastName}}</td>
           <td>{{user.AbsenceDefinitionName}}
-          
         </tr>
       }
     </table>

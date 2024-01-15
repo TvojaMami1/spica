@@ -42,11 +42,11 @@ export class SettingsComponent {
         // Store the token or do something with it
         let obj = token;
         window.localStorage.setItem("token", JSON.stringify(token));
-        alert("Avtorizacijski podatki nastavljeni.")
+        alert("Auth data is set.")
       },
       error => {
         console.error('Error fetching the access token:', error);
-        alert("Napačni auth podatki:(")
+        alert("Wrong auth data, try again:(")
       }
     );
 

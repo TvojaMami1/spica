@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,9 @@ export class UsersService {
   addUser(first: string, last: string, email: string) {
     const now = new Date();
     let url = "https://api4.allhours.com/api/v1/Users"
+    let uuid = uuidv4();
     const body = {
-      "Id": "3fa85f64-5717-4562-b3fc-2c963f66bbbb",
+      "Id": uuid,
       "FirstName": first,
       "LastName": last,
       "MiddleName": "",

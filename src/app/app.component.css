@@ -1,3 +1,8 @@
+*  {
+    font-family: Verdana, Tahoma, sans-serif;
+    color: rgb(27, 85, 192);
+}
+
 .nice-table {
     border: 1px black solid;
     margin: 20px;
@@ -8,9 +13,42 @@ label {
 }
 
 button {
-    margin-left: 10px;
+    margin: 10px;
+    margin-left: 20px;
 }
 
 #clear-button {
     margin-top: 10px;
+}
+
+nav {
+    background: rgb(250, 142, 142);
+    padding: 20px;
+}
+
+.active {
+    background-color: black;
+    color: lightgray;
+}
+
+nav a{
+    margin: 0 10px;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 5px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+nav a:hover {
+    background-color: white;
+}
+
+a:active {
+    background: black;
+    color: black;  
+}
+
+hr {
+    margin-top: 20px;
 }
