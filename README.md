@@ -13,4 +13,4 @@ Ob uspešni instalaciji lahko odpremo komandno vrstico in se pomaknemo v željen
 
 ## Poženemo projekt
 
-Najprej še za vsak slučaj poženemo ukaz `npm install`, potem pa lahko poženemo ukaz `npm start`. S tem bi se moral naš projekt zagnati. V brskalniku ga lahko vidimo, če dostopamo do `http://localhost:4200/`.
+Premaknemo se v novo nastalo datoteko od našega git projekta (spica). Najprej še za vsak slučaj poženemo ukaz `npm install`, potem pa lahko poženemo ukaz `npm start`. S tem bi se moral naš projekt zagnati. V brskalniku ga lahko vidimo, če dostopamo do `http://localhost:4200/`.
