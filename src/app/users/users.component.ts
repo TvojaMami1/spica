@@ -94,18 +94,14 @@ export class UsersComponent {
   })
 
   title = 'Users';
-  token = window.localStorage.getItem("token");
-  tokenObj = JSON.parse(this.token || "");
-  users;
   showUsers = true;
   errorString = "";
-  keys: any = [];
   usersData: any;
   searchUserData: any;
   absences: any;
 
   constructor(private userService: UsersService) {
-    this.users = this.userService.getUsers().subscribe(
+    this.userService.getUsers().subscribe(
       data => {
         console.log('Access Token:', data);
         this.usersData = data;
@@ -147,7 +143,7 @@ export class UsersComponent {
     this.userService.addUser(this.addUserForm.value.firstName!, this.addUserForm.value.lastName!, this.addUserForm.value.email!).subscribe(
       data => {
         console.log('added user:', data);
-        this.users = this.userService.getUsers().subscribe(
+        this.userService.getUsers().subscribe(
           data => {
             console.log('Access Token:', data);
             this.usersData = data;

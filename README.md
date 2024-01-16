@@ -1,27 +1,16 @@
-# MyApp
+# Spica testiranje
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Pripravimo Angular in Node
+Projekt bomo zagnali s pomočjo NPM-ja. 
+Odpremo ukazno vrstico in poženemo ukaz `npm install -g @angular/cli`. V primeru, da nimamo naloženega Node.js, ali pa imamo starejšo verzijo, jo je potrebno posodobiti na vsaj verzijo 18.13. To lahko storimo na več načinov, lahko obiščemo spletno stran od [Node.js](https://nodejs.org/en) in naložimo na računalnik priporočljivo verzijo Noda. Sledimo instalacijskim navodilom.
+Ob uspešni instalaciji ponovno zaženemo zgornji ukaz.
 
-## Code scaffolding
+## Naložimo projekt
+Sedaj je potrebno skopirati oziroma klonirati projekt iz githuba. Če slučajno nimamo gita instaliranega na računalniku, je potrebno to storiti sedaj. Odpremo spletno stran od [Gita](https://git-scm.com/) in naložimo git na računalnik ter sledimo instalacijskim navodilom.
+Ob uspešni instalaciji lahko odpremo komandno vrstico in se pomaknemo v željeno datoteko, kamor želimo naložiti projekt iz Githuba. V vrstico napišemo `git clone <link-do-projekta>`, kjer moramo `<link-do-projekta>` zamenjati z dejanskim linkom do projekta. Tega dobimo na github strani od projekta in sicer klikniti je potrebno zelen gumb, kjer piše `<> code`. Tam pa se zgolj skopira link in zamenja z `<link-do-projekta>`. Potem poženemo ukaz in projekt se naloži v izbrano datoteko.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Poženemo projekt
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Najprej še za vsak slučaj poženemo ukaz `npm install`, potem pa lahko poženemo ukaz `npm start`. S tem bi se moral naš projekt zagnati. V brskalniku ga lahko vidimo, če dostopamo do `http://localhost:4200/`.

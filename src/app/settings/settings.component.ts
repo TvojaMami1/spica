@@ -29,8 +29,6 @@ export class SettingsComponent {
     secret: new FormControl(''),
   });
 
-  //constructor(private apiConnectionService: ApiConnectionService) {}
-
   constructor(private userService: UsersService) { }
 
   handleSubmit() {

@@ -9,10 +9,10 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  token = window.localStorage.getItem("token");
-  tokenObj = JSON.parse(this.token || "");
-  access = this.tokenObj.access_token;
-  bearer = this.tokenObj.token_type;
+  token = typeof window === 'undefined' ? undefined : window.localStorage.getItem("token");
+  tokenObj = this.token ? JSON.parse(this.token) : null;
+  access = this.tokenObj?.access_token || null;
+  bearer = this.tokenObj?.token_type || null;
 
   getUsers() {
     let url = "https://api4.allhours.com/api/v1/users"
